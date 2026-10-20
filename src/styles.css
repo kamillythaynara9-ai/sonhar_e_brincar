@@ -1057,35 +1057,92 @@ p {
 }
 
 /* =====================================================================
-   13. Topo da página inicial — cenas que inflam
+   13. Topo da página inicial — pilha de fotos que inflam
+   Regra: a foto nunca aparece maior que o arquivo (fotos de celular de
+   ~1100 px). A moldura tem no máximo 560 px de largura e proporção 4:5.
    ===================================================================== */
 .topo {
   position: relative;
-  min-height: 100svh;
+  padding: calc(var(--altura-cabecalho) + 24px) 0 70px;
+  overflow-x: clip;
+}
+@media (max-width: 599px) {
+  .topo__texto .linha-botoes {
+    gap: 8px;
+  }
+  .topo__texto .botao {
+    min-height: 48px;
+    padding: 0 16px;
+    font-size: 15.5px;
+  }
+  .topo__titulo {
+    margin: 6px 0 10px;
+  }
+  .topo__sub {
+    margin-bottom: 18px;
+  }
+  .topo__carta-tras {
+    transform: rotate(4deg) translate(3%, 2%) scale(0.95);
+  }
+}
+.topo__conteudo {
   display: grid;
-  align-items: end;
-  overflow: hidden;
-  isolation: isolate;
+  gap: 34px;
+  align-items: center;
+}
+.topo__texto {
+  max-width: 620px;
+}
+.topo__titulo {
+  font-size: clamp(38px, 9.6vw, 78px);
+  margin: 10px 0 14px;
+}
+.topo__sub {
+  font-size: clamp(16px, 2.2vw, 19px);
+  color: var(--noite-suave);
+  margin-bottom: 22px;
+  max-width: 50ch;
+}
+.topo__vitrine {
+  display: grid;
+  gap: 16px;
+  justify-items: center;
   touch-action: pan-y;
 }
-.topo__cenas {
+.topo__pilha {
+  position: relative;
+  width: min(100%, 560px, 64svh);
+  aspect-ratio: 4 / 5;
+}
+.topo__moldura,
+.topo__carta-tras {
   position: absolute;
   inset: 0;
-  z-index: -2;
-  transform: translateY(calc(var(--rolagem, 0) * 0.35px)) scale(calc(1 + var(--rolagem, 0) * 0.0002));
+  overflow: hidden;
+  border-radius: 46px 60px 42px 64px / 52px 46px 62px 50px;
+  background: var(--nuvem-2);
+}
+.topo__moldura {
+  box-shadow: 0 0 0 8px var(--branco), var(--sombra-flutuando);
+}
+.topo__carta-tras {
+  transform: rotate(5deg) translate(5%, 2%) scale(0.94);
+  opacity: 0.85;
+  box-shadow: 0 0 0 8px var(--branco), var(--sombra-suave);
+  animation: aparecer 0.6s both;
+}
+.topo__carta-tras img,
+.topo__cena img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .topo__cena {
   position: absolute;
   inset: 0;
   opacity: 0;
-  -webkit-mask: var(--mascara-nuvem) center 45% / 900% 900% no-repeat;
-  mask: var(--mascara-nuvem) center 45% / 900% 900% no-repeat;
-}
-.topo__cena img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  animation: zoom-lento 9s ease-out both;
+  -webkit-mask: var(--mascara-nuvem) center / 900% 900% no-repeat;
+  mask: var(--mascara-nuvem) center / 900% 900% no-repeat;
 }
 .topo__cena--anterior {
   opacity: 1;
@@ -1094,76 +1151,18 @@ p {
 .topo__cena--atual {
   opacity: 1;
   z-index: 1;
-  animation: cena-inflando 1.25s var(--suave) both;
+  animation: cena-inflando 1.15s var(--suave) both;
 }
-/* A primeira cena não "infla": já está lá quando a intro sobe. */
+/* A primeira foto não "infla": já está lá quando a intro sobe. */
 .topo__cena--atual:first-child:not(.topo__cena--anterior) {
   animation-duration: 0.01s;
-}
-.topo__veu {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  background:
-    linear-gradient(180deg, rgba(226, 242, 253, 0.55) 0%, rgba(226, 242, 253, 0) 22%),
-    linear-gradient(0deg, rgba(244, 250, 255, 0.95) 0%, rgba(244, 250, 255, 0.5) 30%, rgba(244, 250, 255, 0) 55%);
-}
-.topo::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -1px;
-  height: 60px;
-  background: var(--nuvem);
-  -webkit-mask: var(--mascara-nuvem-borda) repeat-x bottom / 260px 100%;
-  mask: var(--mascara-nuvem-borda) repeat-x bottom / 260px 100%;
-}
-.topo__conteudo {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  gap: 16px;
-  padding-top: calc(var(--altura-cabecalho) + 40px);
-  padding-bottom: 72px;
-}
-.topo__texto {
-  max-width: 640px;
-  padding: 20px 20px 20px;
-  background: rgba(255, 255, 255, 0.62);
-  border-radius: var(--raio-nuvem);
-  box-shadow: var(--sombra-flutuando);
-}
-.topo__titulo {
-  font-size: clamp(36px, 9.6vw, 82px);
-  margin: 8px 0 10px;
-}
-.topo__sub {
-  font-size: clamp(15px, 2.2vw, 19px);
-  line-height: 1.5;
-  color: var(--noite);
-  margin-bottom: 18px;
-  max-width: 50ch;
-}
-.topo__texto .linha-botoes {
-  gap: 8px;
-}
-@media (max-width: 599px) {
-  .topo__texto .botao {
-    min-height: 48px;
-    padding: 0 18px;
-    font-size: 16px;
-  }
-  .topo__conteudo {
-    padding-bottom: 56px;
-  }
 }
 .topo__seletor {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: center;
+  gap: 8px 14px;
 }
 .topo__agora {
   display: inline-flex;
@@ -1171,9 +1170,7 @@ p {
   gap: 10px;
   padding: 10px 16px 10px 18px;
   border-radius: var(--raio-pilula);
-  background: rgba(255, 255, 255, 0.85);
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  background: var(--branco);
   text-decoration: none;
   box-shadow: var(--sombra-suave);
   transition: transform 0.35s var(--mola);
@@ -1200,10 +1197,10 @@ p {
 }
 .topo__pontos {
   display: flex;
-  gap: 4px;
+  gap: 2px;
 }
 .topo__ponto {
-  width: 34px;
+  width: 32px;
   height: 44px;
   display: grid;
   place-items: center;
@@ -1213,11 +1210,10 @@ p {
 }
 .topo__ponto span {
   display: block;
-  width: 26px;
+  width: 24px;
   height: 8px;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.85);
-  box-shadow: 0 2px 6px rgba(30, 111, 217, 0.3);
+  background: var(--nuvem-3);
   overflow: hidden;
   position: relative;
 }
@@ -1235,17 +1231,17 @@ p {
   }
 }
 @media (min-width: 900px) {
+  .topo {
+    min-height: 100svh;
+    display: grid;
+    align-items: center;
+  }
   .topo__conteudo {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    padding-bottom: 96px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 50px;
   }
-  .topo__texto {
-    padding: 36px 36px 32px;
-  }
-  .topo__seletor {
-    flex-direction: column;
-    align-items: flex-end;
+  .topo__pilha {
+    width: min(100%, 500px, 62svh);
   }
 }
 
