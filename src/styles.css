@@ -384,8 +384,12 @@ p {
 }
 @keyframes cena-inflando {
   from {
-    -webkit-mask-size: 0% 0%;
-    mask-size: 0% 0%;
+    -webkit-mask-size: 40% 40%;
+    mask-size: 40% 40%;
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
   }
   to {
     -webkit-mask-size: 900% 900%;
@@ -1151,7 +1155,44 @@ p {
 .topo__cena--atual {
   opacity: 1;
   z-index: 1;
-  animation: cena-inflando 0.9s var(--suave) both;
+  animation: cena-inflando 1.3s var(--suave) both;
+}
+.topo__cena--anterior img {
+  animation: cena-saindo 1.3s var(--suave) both;
+}
+/* Nuvens que atravessam a foto na troca */
+.topo__nuvens-troca {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.topo__nuvens-troca span {
+  position: absolute;
+  left: 0;
+  aspect-ratio: 200 / 140;
+  background: var(--branco);
+  -webkit-mask: var(--mascara-nuvem) center / 100% 100% no-repeat;
+  mask: var(--mascara-nuvem) center / 100% 100% no-repeat;
+  filter: blur(1.5px) drop-shadow(0 10px 18px rgba(27, 42, 74, 0.12));
+  opacity: 0;
+  animation: nuvem-atravessando 1.5s cubic-bezier(0.45, 0, 0.25, 1) both;
+}
+.topo__nuvens-troca span:nth-child(1) { top: 4%; width: 62%; }
+.topo__nuvens-troca span:nth-child(2) { top: 34%; width: 84%; animation-delay: 0.08s; }
+.topo__nuvens-troca span:nth-child(3) { top: 62%; width: 70%; animation-delay: 0.16s; }
+.topo__nuvens-troca span:nth-child(4) { top: 18%; width: 46%; animation-delay: 0.24s; }
+@keyframes nuvem-atravessando {
+  0% { transform: translateX(-110%) scale(0.9); opacity: 0; }
+  25%, 50% { opacity: 0.95; }
+  100% { transform: translateX(190%) scale(1.05); opacity: 0; }
+}
+@keyframes cena-saindo {
+  to { opacity: 0.4; transform: translateX(6%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .topo__nuvens-troca { display: none; }
+  .topo__cena--atual, .topo__cena--anterior img { animation-duration: 0.01s; }
 }
 /* A primeira foto não "infla": já está lá quando a intro sobe. */
 .topo__cena--atual:first-child:not(.topo__cena--anterior) {

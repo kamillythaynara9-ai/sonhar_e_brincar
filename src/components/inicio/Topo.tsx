@@ -97,6 +97,15 @@ export function Topo() {
                   <Foto nome={c.foto} alt="" prioridade={i === 0} style={{ objectPosition: c.foco }} />
                 </div>
               ))}
+              {/* na troca, um bando de nuvens passa na frente e revela a próxima foto */}
+              {anterior !== null && (
+                <div className="topo__nuvens-troca" key={`n${atual}`}>
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              )}
             </div>
           </div>
 
