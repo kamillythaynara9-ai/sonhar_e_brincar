@@ -93,19 +93,10 @@ export function Topo() {
             </div>
             <div className="topo__moldura" aria-hidden="true">
               {CENAS.map((c, i) => (
-                <div key={c.foto} className={`topo__cena${i === atual ? " topo__cena--atual" : ""}${i === anterior ? " topo__cena--anterior" : ""}`}>
+                <div key={c.foto} className={`topo__cena${i === atual ? " topo__cena--atual" : ""}${i === anterior ? " topo__cena--anterior" : ""}${i === atual && anterior === null ? " topo__cena--inicio" : ""}`}>
                   <Foto nome={c.foto} alt="" prioridade={i === 0} style={{ objectPosition: c.foco }} />
                 </div>
               ))}
-              {/* na troca, um bando de nuvens passa na frente e revela a próxima foto */}
-              {anterior !== null && (
-                <div className="topo__nuvens-troca" key={`n${atual}`}>
-                  <span />
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              )}
             </div>
           </div>
 
