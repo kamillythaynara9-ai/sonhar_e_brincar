@@ -1225,13 +1225,14 @@ p {
     transform: scaleX(0);
   }
 }
-/* Celular: as fotos voltam a passar no fundo, mas só na altura em que
-   continuam nítidas (fotos de ~1080 px numa tela de 390 px). */
+/* Celular: as fotos passam no fundo do topo, só na altura em que continuam
+   nítidas (fotos de ~1080 px numa tela de 390 px). O texto continua a página
+   logo abaixo, sem cartão, e o "Na foto" fica em cima das fotos. */
 @media (max-width: 599px) {
   .topo {
     --altura-foto: min(118vw, 66svh);
-    padding-top: calc(var(--altura-foto) - 92px);
-    padding-bottom: 56px;
+    padding-top: calc(var(--altura-foto) - 36px);
+    padding-bottom: 48px;
   }
   .topo__vitrine.entra-apos-intro {
     animation: none;
@@ -1260,18 +1261,33 @@ p {
     z-index: 3;
     background:
       linear-gradient(180deg, rgba(226, 242, 253, 0.7) 0%, rgba(226, 242, 253, 0) 22%),
-      linear-gradient(0deg, var(--nuvem) 0%, rgba(244, 250, 255, 0) 32%);
+      linear-gradient(0deg, var(--nuvem) 0%, rgba(244, 250, 255, 0.85) 12%, rgba(244, 250, 255, 0) 38%);
   }
-  .topo__texto,
-  .topo__seletor {
+  .topo__texto {
     position: relative;
     z-index: 1;
   }
-  .topo__texto {
-    padding: 20px 18px;
-    background: rgba(255, 255, 255, 0.92);
-    border-radius: var(--raio-nuvem);
-    box-shadow: var(--sombra-flutuando);
+  .topo__seletor {
+    position: absolute;
+    z-index: 1;
+    top: calc(var(--altura-foto) - 132px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .topo__agora {
+    padding: 8px 14px 8px 16px;
+    font-size: 15px;
+  }
+  .topo__pontos {
+    padding: 0 6px;
+    border-radius: var(--raio-pilula);
+    background: rgba(255, 255, 255, 0.7);
+  }
+  .topo__ponto {
+    width: 28px;
+    height: 26px;
   }
 }
 @media (min-width: 900px) {
