@@ -1514,7 +1514,7 @@ p {
   font-family: var(--fonte-titulo);
   font-weight: 700;
   font-size: 18px;
-  color: var(--nuvem-3);
+  color: var(--ceu);
   transition: color 0.3s;
 }
 .promessa__titulo {
