@@ -1225,6 +1225,55 @@ p {
     transform: scaleX(0);
   }
 }
+/* Celular: as fotos voltam a passar no fundo, mas só na altura em que
+   continuam nítidas (fotos de ~1080 px numa tela de 390 px). */
+@media (max-width: 599px) {
+  .topo {
+    --altura-foto: min(118vw, 66svh);
+    padding-top: calc(var(--altura-foto) - 92px);
+    padding-bottom: 56px;
+  }
+  .topo__vitrine.entra-apos-intro {
+    animation: none;
+  }
+  .topo__pilha {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: var(--altura-foto);
+    aspect-ratio: auto;
+    z-index: 0;
+  }
+  .topo__carta-tras {
+    display: none;
+  }
+  .topo__moldura {
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .topo__moldura::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    background:
+      linear-gradient(180deg, rgba(226, 242, 253, 0.7) 0%, rgba(226, 242, 253, 0) 22%),
+      linear-gradient(0deg, var(--nuvem) 0%, rgba(244, 250, 255, 0) 32%);
+  }
+  .topo__texto,
+  .topo__seletor {
+    position: relative;
+    z-index: 1;
+  }
+  .topo__texto {
+    padding: 20px 18px;
+    background: rgba(255, 255, 255, 0.92);
+    border-radius: var(--raio-nuvem);
+    box-shadow: var(--sombra-flutuando);
+  }
+}
 @media (min-width: 900px) {
   .topo {
     min-height: 100svh;
