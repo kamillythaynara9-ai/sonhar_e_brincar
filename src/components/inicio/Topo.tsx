@@ -25,7 +25,7 @@ const CENAS = [
   { brinquedo: "cama-elastica-casinha", foto: "cama-elastica-casinha", foco: "50% 60%" },
   { brinquedo: "gladiador-inflavel", foto: "gladiador-inflavel", foco: "50% 50%" },
 ];
-const INTERVALO = 5200;
+const INTERVALO = 3000;
 
 export function Topo() {
   const [atual, setAtual] = useState(0);

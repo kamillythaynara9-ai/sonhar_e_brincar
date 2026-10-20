@@ -1151,7 +1151,7 @@ p {
 .topo__cena--atual {
   opacity: 1;
   z-index: 1;
-  animation: cena-inflando 1.15s var(--suave) both;
+  animation: cena-inflando 0.9s var(--suave) both;
 }
 /* A primeira foto não "infla": já está lá quando a intro sobe. */
 .topo__cena--atual:first-child:not(.topo__cena--anterior) {
