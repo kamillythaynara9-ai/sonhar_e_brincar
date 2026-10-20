@@ -1276,18 +1276,35 @@ p {
     flex-direction: column;
     gap: 6px;
   }
+  .topo__seletor {
+    top: calc(var(--altura-foto) - 104px);
+    gap: 5px;
+  }
   .topo__agora {
-    padding: 8px 14px 8px 16px;
-    font-size: 15px;
+    gap: 7px;
+    padding: 5px 10px 5px 12px;
+  }
+  .topo__agora span {
+    font-size: 10px;
+  }
+  .topo__agora strong {
+    font-size: 14px;
+  }
+  .topo__agora svg {
+    width: 14px;
   }
   .topo__pontos {
-    padding: 0 6px;
+    padding: 0 4px;
     border-radius: var(--raio-pilula);
     background: rgba(255, 255, 255, 0.7);
   }
   .topo__ponto {
-    width: 28px;
-    height: 26px;
+    width: 22px;
+    height: 18px;
+  }
+  .topo__ponto span {
+    width: 16px;
+    height: 5px;
   }
 }
 @media (min-width: 900px) {
